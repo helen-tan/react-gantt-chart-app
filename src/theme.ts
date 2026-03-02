@@ -1,11 +1,12 @@
 import { createTheme } from "@mui/material/styles";
+import { ThemeModes } from "./types/theme.model";
 
 // ------------------------------
 // --       LIGHT THEME        --
 // ------------------------------
 export const lightTheme = createTheme({
   palette: {
-    mode: "light",
+    mode: ThemeModes.LIGHT,
     primary: {
       main: "#635ffa",
       light: "#7f6aff",
@@ -46,7 +47,7 @@ export const lightTheme = createTheme({
 // ------------------------------
 export const darkTheme = createTheme({
   palette: {
-    mode: "dark",
+    mode: ThemeModes.DARK,
     primary: {
       main: "#8c7bff",
       light: "#a28fff",
