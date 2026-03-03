@@ -12,12 +12,16 @@ interface ThemeContextProviderProps {
 export const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
     const [mode, setMode] = useState<ThemeMode>(ThemeModes.LIGHT);
 
-    const toggleThemeMode = () => setMode(prev => prev === ThemeModes.LIGHT ? ThemeModes.DARK: ThemeModes.LIGHT);
+    const toggleThemeMode = () => setMode(prev => 
+        prev === ThemeModes.LIGHT 
+        ? ThemeModes.DARK
+        : ThemeModes.LIGHT
+    );
 
-    const theme = useMemo(() => (mode === ThemeModes.LIGHT) ? lightTheme : darkTheme ,[mode]);
+    const theme = useMemo(() => (mode === ThemeModes.LIGHT) ? lightTheme : darkTheme, [mode]);
 
     return(
-        <ThemeContext.Provider value={{ toggleThemeMode }}>
+        <ThemeContext.Provider value={{ mode, toggleThemeMode }}>
             <MuiThemeProvider theme={theme}>
                 <CssBaseline/>
                 {children}
