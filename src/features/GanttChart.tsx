@@ -4,6 +4,7 @@ import { useContext, useMemo } from "react";
 import { ThemeContext } from "../contexts/themeContext/ThemeContext";
 import { ThemeModes } from "../types/theme.model";
 import { Box } from "@mui/material";
+import "./GanttChart.module.css";
 
 export default function GanttChart() {
   const { mode } = useContext(ThemeContext);
