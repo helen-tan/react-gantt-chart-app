@@ -18,8 +18,8 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUnusedLocals": true, // commented out so that it will be reported by eslint instead of TypeScript
+    // "noUnusedParameters": true,  // commented out so that it will be reported by eslint instead of TypeScript
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true

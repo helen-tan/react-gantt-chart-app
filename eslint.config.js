@@ -8,16 +8,30 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 export default defineConfig([
   globalIgnores(['dist']),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['src/**/*.{ts,tsx}'], // enable type-aware linting only for src files
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommendedTypeChecked,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      "plugin:prettier/recommended",
     ],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      parserOptions: {
+        project: ['./tsconfig.app.json']
+      },
+      // ecmaVersion: 2020,
+      globals: globals.browser
     },
+    plugins: ["prettier"],
+    rules: {
+      'no-unneeded-ternary': 'error',
+      '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/require-await': 'error',
+      '@typescript-eslint/no-explicit-any': 'off',
+      // 'import/no-unresolved': 'error',
+      "prettier/prettier": "error" // shows formatting errors as ESLint errors
+    }
   },
 ])
