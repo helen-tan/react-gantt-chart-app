@@ -14,6 +14,7 @@ export default defineConfig([
       ...tseslint.configs.recommendedTypeChecked,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      "plugin:prettier/recommended",
     ],
     languageOptions: {
       parserOptions: {
@@ -22,13 +23,15 @@ export default defineConfig([
       // ecmaVersion: 2020,
       globals: globals.browser
     },
+    plugins: ["prettier"],
     rules: {
       'no-unneeded-ternary': 'error',
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/require-await': 'error',
       '@typescript-eslint/no-explicit-any': 'off',
-      // 'import/no-unresolved': 'error'
+      // 'import/no-unresolved': 'error',
+      "prettier/prettier": "error" // shows formatting errors as ESLint errors
     }
   },
 ])
