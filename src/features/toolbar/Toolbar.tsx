@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import ThemeToggleButton from '../ThemeToggleButton';
+import ThemeToggleButton from '../../ThemeToggleButton';
 
-export default function GanttToolbar() {
+export default function Toolbar() {
   return (
     <Box
       sx={{
