@@ -5,17 +5,17 @@ import type { GanttState } from '../types';
 const initialState: GanttState = {
   tasks: [
     {
-      id: 1,
-      text: 'Test Task 1',
+      taskId: 1,
+      title: 'Test Task 1',
       start: new Date(2024, 0, 1),
       end: new Date(2024, 0, 10),
       progress: 100,
       type: 'task',
-      open: true,
+      isOpen: true,
     },
     {
-      id: 2,
-      text: 'Test Task 2',
+      taskId: 2,
+      title: 'Test Task 2',
       start: new Date(2024, 0, 1),
       end: new Date(2024, 0, 5),
       progress: 100,
@@ -24,7 +24,7 @@ const initialState: GanttState = {
     },
     // ... more tasks
   ],
-  links: [{ id: 1, source: 2, target: 3, type: 'e2s' }],
+  links: [{ linkId: 1, source: 2, target: 3, type: 'e2s' }],
   scales: [
     { unit: 'month', step: 1, format: '%M %Y' },
     { unit: 'week', step: 1, format: 'Week %w' },

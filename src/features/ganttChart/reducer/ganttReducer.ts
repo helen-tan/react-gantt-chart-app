@@ -1,11 +1,11 @@
-import type { GanttState, Link, Scale, Task } from '../types';
+import type { GanttState, AppLink, AppScale, AppTask } from '../types';
 
 export type GanttAction =
-  | { type: 'SET_TASKS'; payload: Task[] }
-  | { type: 'SET_LINKS'; payload: Link[] }
-  | { type: 'SET_SCALES'; payload: Scale[] };
-//   | { type: 'ADD_TASK'; payload: Task }
-//   | { type: 'UPDATE_TASK'; payload: Task }
+  | { type: 'SET_TASKS'; payload: AppTask[] }
+  | { type: 'SET_LINKS'; payload: AppLink[] }
+  | { type: 'SET_SCALES'; payload: AppScale[] };
+//   | { type: 'ADD_TASK'; payload: AppTask }
+//   | { type: 'UPDATE_TASK'; payload: AppTask }
 //   | { type: 'DELETE_TASK'; payload: string };
 
 export const ganttReducer = (state: GanttState, action: GanttAction): GanttState => {

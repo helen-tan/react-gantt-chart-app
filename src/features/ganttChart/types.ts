@@ -1,29 +1,43 @@
-export interface Task {
-  id: number;
-  text: string;
+// -------------------------------
+// --       Custom Models       --
+// -------------------------------
+
+// Tasks
+// -----------------
+export type AppTaskType = 'task' | 'summary' | 'milestone'; // maps to SVAR ITaskType
+export interface AppTask {
+  taskId: number; // maps to SVAR ITask - id
+  title: string; // maps to SVAR ITask - text
   start: Date;
   end: Date;
   progress: number;
-  type: string;
-  open?: boolean;
+  type: AppTaskType;
+  isOpen?: boolean;
   parent?: number;
 }
 
-export interface Link {
-  id: number;
+// Links
+// -----------------
+
+export type AppLinkType = 's2s' | 's2e' | 'e2s' | 'e2e'; // same as SVAR's ILinkType
+export interface AppLink {
+  linkId: number; // maps to SVAR ILink - id
   source: number;
   target: number;
-  type: string;
+  type: AppLinkType;
 }
 
-export interface Scale {
+// Scales
+// -----------------
+
+export interface AppScale {
   unit: string;
   step: number;
   format: string;
 }
 
 export interface GanttState {
-  tasks: Task[];
-  links: Link[];
-  scales: Scale[];
+  tasks: AppTask[];
+  links: AppLink[];
+  scales: AppScale[];
 }
