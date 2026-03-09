@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import ThemeToggleButton from '../../ThemeSelectDropdown';
+import ThemeToggleButton from './ThemeSelectDropdown';
 
 export default function Toolbar() {
   return (

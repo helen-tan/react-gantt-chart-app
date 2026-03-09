@@ -7,9 +7,9 @@ import InputLabel from '@mui/material/InputLabel';
 import Box from '@mui/material/Box';
 import SunnyIcon from '@mui/icons-material/Sunny';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
-import { ThemeModes, type ThemeMode } from './types/theme.model';
-import { ThemeContext } from './contexts/themeContext/ThemeContext';
-import { darkTheme, lightTheme } from './theme';
+import { ThemeModes, type ThemeMode } from '../../types/theme.model';
+import { ThemeContext } from '../../contexts/themeContext/ThemeContext';
+import { darkTheme, lightTheme } from '../../theme';
 
 export default function ThemeToggleButton() {
   const [mode, setMode] = useState<ThemeMode>(ThemeModes.LIGHT);
