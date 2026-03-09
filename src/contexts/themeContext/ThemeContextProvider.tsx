@@ -12,8 +12,9 @@ interface ThemeContextProviderProps {
 export const ThemeContextProvider = ({ children }: ThemeContextProviderProps) => {
   const [mode, setMode] = useState<ThemeMode>(ThemeModes.LIGHT);
 
-  const toggleThemeMode = () =>
-    setMode((prev) => (prev === ThemeModes.LIGHT ? ThemeModes.DARK : ThemeModes.LIGHT));
+  const toggleThemeMode = (newMode: ThemeMode) => {
+    setMode(newMode);
+  };
 
   const theme = useMemo(() => (mode === ThemeModes.LIGHT ? lightTheme : darkTheme), [mode]);
 

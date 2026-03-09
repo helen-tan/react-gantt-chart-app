@@ -3,7 +3,7 @@ import { ThemeModes, type ThemeMode } from '../../types/theme.model';
 
 export interface ThemeContextType {
   mode: ThemeMode;
-  toggleThemeMode: () => void;
+  toggleThemeMode: (newMode: ThemeMode) => void;
 }
 
 export const ThemeContext = createContext<ThemeContextType>({
