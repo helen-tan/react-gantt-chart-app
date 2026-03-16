@@ -1,7 +1,7 @@
 import { Gantt, Willow, WillowDark } from '@svar-ui/react-gantt';
 import '@svar-ui/react-gantt/all.css';
 import { useContext, useMemo } from 'react';
-import { ThemeContext } from '../../contexts/themeContext/ThemeContext';
+import { ThemeContext } from '../../contexts/themeContext/context';
 import { ThemeModes } from '../../types/theme.model';
 import { Box } from '@mui/material';
 import { useGanttState } from './hooks/useGanttState';

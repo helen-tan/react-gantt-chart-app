@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import SunnyIcon from '@mui/icons-material/Sunny';
 import NightlightRoundIcon from '@mui/icons-material/NightlightRound';
 import { ThemeModes, type ThemeMode } from '../../types/theme.model';
-import { ThemeContext } from '../../contexts/themeContext/ThemeContext';
+import { ThemeContext } from '../../contexts/themeContext/context';
 import { darkTheme, lightTheme } from '../../theme';
 
 export default function ThemeToggleButton() {
