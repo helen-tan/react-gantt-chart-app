@@ -1,8 +1,9 @@
 import { useState, type ReactNode } from 'react';
-import { RightDrawerContext } from './RightDrawerContext';
+import { RightDrawerContext } from './context';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import type { SxProps } from '@mui/material/styles';
+import { RIGHT_DRAWER_SIZES, RightDrawerSizes, type RightDrawerSize } from './config';
 
 type RightDrawerProviderProps = {
   children: React.ReactNode;
@@ -11,8 +12,10 @@ type RightDrawerProviderProps = {
 export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [content, setContent] = useState<React.ReactNode>(null);
+  const [size, setSize] = useState<RightDrawerSize>(RightDrawerSizes.M); // default M size
 
-  const openDrawer = (drawerContent: ReactNode) => {
+  const openDrawer = (drawerContent: ReactNode, size: RightDrawerSize = RightDrawerSizes.M) => {
+    setSize(size);
     setContent(drawerContent);
     setIsOpen(true);
   };
@@ -22,7 +25,7 @@ export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
     position: 'fixed',
     top: 0,
     right: 0,
-    width: 400,
+    width: RIGHT_DRAWER_SIZES[size],
     height: '100vh',
     bgcolor: 'background.paper',
     boxShadow: 6,

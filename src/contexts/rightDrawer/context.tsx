@@ -1,8 +1,9 @@
 import { createContext, useContext } from 'react';
+import type { RightDrawerSize } from './config';
 
 export interface RightDrawerContextType {
   isOpen: boolean;
-  openDrawer: (content: React.ReactNode) => void;
+  openDrawer: (content: React.ReactNode, size?: RightDrawerSize) => void;
   closeDrawer: () => void;
 }
 
