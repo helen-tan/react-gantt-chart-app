@@ -3,13 +3,17 @@ import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import { ThemeContextProvider } from './contexts/themeContext/ThemeContextProvider.tsx';
 import { RightDrawerProvider } from './contexts/rightDrawer/RightDrawerProvider.tsx';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeContextProvider>
-      <RightDrawerProvider>
-        <App />
-      </RightDrawerProvider>
+      <LocalizationProvider dateAdapter={AdapterMoment}>
+        <RightDrawerProvider>
+          <App />
+        </RightDrawerProvider>
+      </LocalizationProvider>
     </ThemeContextProvider>
   </StrictMode>,
 );
