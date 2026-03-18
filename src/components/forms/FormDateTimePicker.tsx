@@ -2,6 +2,8 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useField, useFormikContext } from 'formik';
 import moment, { type Moment } from 'moment';
 import { useCallback } from 'react';
+import type { SxProps, Theme } from '@mui/material/styles';
+import type { TextFieldProps } from '@mui/material';
 
 interface FormDateTimePickerProps {
   name: string;
@@ -10,10 +12,14 @@ interface FormDateTimePickerProps {
   format?: string;
   disabled?: boolean;
   onChange?: (value: number | null) => void;
+
+  // Custom styling
+  sx?: SxProps<Theme>;
+  textFieldProps?: TextFieldProps;
 }
 
 export function FormDateTimePicker(props: FormDateTimePickerProps) {
-  const { name, label, format, disabled, onChange } = props;
+  const { name, label, format, disabled, onChange, sx, textFieldProps } = props;
 
   const [field, meta] = useField(name);
   const { setFieldValue } = useFormikContext();
@@ -35,6 +41,14 @@ export function FormDateTimePicker(props: FormDateTimePickerProps) {
       format={format}
       disabled={disabled}
       onChange={handleChange}
+      // apply component provided styles
+      sx={sx}
+      slotProps={{
+        textField: {
+          ...textFieldProps,
+          // validation here next time
+        },
+      }}
     />
   );
 }

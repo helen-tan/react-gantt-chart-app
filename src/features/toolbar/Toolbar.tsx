@@ -3,13 +3,15 @@ import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import ThemeToggleButton from './ThemeSelectDropdown';
 import { useCallback } from 'react';
-import { useRightDrawer } from '../../contexts/rightDrawer/RightDrawerContext';
+import { useRightDrawer } from '../../contexts/rightDrawer/context';
+import CreateTaskForm from '../forms/createTaskForm/CreateTaskForm';
+import { RightDrawerSizes } from '../../contexts/rightDrawer/config';
 
 export default function Toolbar() {
   const { openDrawer } = useRightDrawer();
 
   const handleClick = useCallback(() => {
-    openDrawer(<div>Test Content</div>);
+    openDrawer(<CreateTaskForm />, RightDrawerSizes.M);
   }, []);
 
   return (
