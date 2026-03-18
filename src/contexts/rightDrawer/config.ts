@@ -9,7 +9,7 @@ export type RightDrawerSize = (typeof RightDrawerSizes)[keyof typeof RightDrawer
 
 export const RIGHT_DRAWER_SIZES: Record<RightDrawerSize, number> = {
   [RightDrawerSizes.S]: 300,
-  [RightDrawerSizes.M]: 400,
+  [RightDrawerSizes.M]: 450,
   [RightDrawerSizes.L]: 600,
   [RightDrawerSizes.XL]: 800,
 };
