@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useRightDrawer } from '../../../contexts/rightDrawer/context';
 
 export default function CreateTaskForm() {
-  const { isOpen, closeDrawer } = useRightDrawer();
+  const { closeDrawer } = useRightDrawer();
 
   const initialValues: CreateTaskFormValues = useMemo(
     () => ({
@@ -23,11 +23,7 @@ export default function CreateTaskForm() {
   }, []);
 
   return (
-    <Form
-      key={isOpen ? 'open' : 'close'} // forces form remount on drawer open/close - clear form state
-      initialValues={initialValues}
-      onSubmit={handleSubmit}
-    >
+    <Form initialValues={initialValues} onSubmit={handleSubmit}>
       <FormContent />
     </Form>
   );
