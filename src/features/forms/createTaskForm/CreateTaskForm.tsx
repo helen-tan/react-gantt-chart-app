@@ -1,7 +1,7 @@
 import { Form } from '../../../components/forms/Form';
 import FormContent from './FormContent';
 import { CreateTaskFormFields, type CreateTaskFormValues } from './CreateTaskFormConfig';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useRightDrawer } from '../../../contexts/rightDrawer/context';
 
 export default function CreateTaskForm() {
