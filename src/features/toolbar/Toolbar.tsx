@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import ThemeToggleButton from './ThemeSelectDropdown';
+import ThemeSelectDropdown from './ThemeSelectDropdown';
 import { useCallback } from 'react';
 import { useRightDrawer } from '../../contexts/rightDrawer/context';
 import CreateTaskForm from '../forms/createTaskForm/CreateTaskForm';
@@ -36,7 +36,7 @@ export default function Toolbar() {
         </Button>
       </Box>
       <Box>
-        <ThemeToggleButton />
+        <ThemeSelectDropdown />
       </Box>
     </Box>
   );

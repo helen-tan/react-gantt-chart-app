@@ -11,7 +11,7 @@ import { ThemeModes, type ThemeMode } from '../../types/theme.model';
 import { ThemeContext } from '../../contexts/themeContext/context';
 import { darkTheme, lightTheme } from '../../theme';
 
-export default function ThemeToggleButton() {
+export default function ThemeSelectDropdown() {
   const [mode, setMode] = useState<ThemeMode>(ThemeModes.LIGHT);
   const { toggleThemeMode } = useContext(ThemeContext);
 
