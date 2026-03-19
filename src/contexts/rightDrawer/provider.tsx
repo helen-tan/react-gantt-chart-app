@@ -13,13 +13,24 @@ export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [content, setContent] = useState<React.ReactNode>(null);
   const [size, setSize] = useState<RightDrawerSize>(RightDrawerSizes.M); // default M size
+  const [shouldRender, setShouldRender] = useState<boolean>(false);
+
+  const SLIDE_TRANSITION_TIME_MS = 300; // 300ms
 
   const openDrawer = (drawerContent: ReactNode, size: RightDrawerSize = RightDrawerSizes.M) => {
     setSize(size);
     setContent(drawerContent);
+    setShouldRender(true); // mount immediately
     setIsOpen(true);
   };
-  const closeDrawer = () => setIsOpen(false);
+  const closeDrawer = () => {
+    setIsOpen(false);
+
+    // wait for sliding out animation to complete before unmounting
+    setTimeout(() => {
+      setShouldRender(false);
+    }, SLIDE_TRANSITION_TIME_MS);
+  };
 
   const rightDrawerStyles: SxProps = {
     position: 'fixed',
@@ -30,7 +41,7 @@ export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
     bgcolor: 'background.paper',
     boxShadow: 6,
     transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
-    transition: 'transform 0.3s ease',
+    transition: `transform ${SLIDE_TRANSITION_TIME_MS}ms ease`,
     zIndex: 1000,
   };
 
@@ -61,12 +72,14 @@ export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
     >
       {children}
       <Box sx={rightDrawerStyles}>
-        {isOpen && (
-          <Box sx={closeButtonStyles} onClick={closeDrawer}>
-            <CloseIcon />
-          </Box>
+        {shouldRender && (
+          <>
+            <Box sx={closeButtonStyles} onClick={closeDrawer}>
+              <CloseIcon />
+            </Box>
+            {content}
+          </>
         )}
-        {content}
       </Box>
     </RightDrawerContext.Provider>
   );
