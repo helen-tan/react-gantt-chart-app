@@ -11,11 +11,11 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeContextProvider>
       <LocalizationProvider dateAdapter={AdapterMoment}>
-        <RightDrawerProvider>
-          <GanttProvider>
+        <GanttProvider>
+          <RightDrawerProvider>
             <App />
-          </GanttProvider>
-        </RightDrawerProvider>
+          </RightDrawerProvider>
+        </GanttProvider>
       </LocalizationProvider>
     </ThemeContextProvider>
   </StrictMode>,
