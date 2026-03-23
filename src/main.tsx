@@ -5,13 +5,16 @@ import { ThemeContextProvider } from './contexts/themeContext/provider.tsx';
 import { RightDrawerProvider } from './contexts/rightDrawer/provider.tsx';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { GanttProvider } from './contexts/gantt/provider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeContextProvider>
       <LocalizationProvider dateAdapter={AdapterMoment}>
         <RightDrawerProvider>
-          <App />
+          <GanttProvider>
+            <App />
+          </GanttProvider>
         </RightDrawerProvider>
       </LocalizationProvider>
     </ThemeContextProvider>
