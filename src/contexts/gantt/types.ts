@@ -10,7 +10,7 @@ export interface AppTask {
   title: string; // maps to SVAR ITask - text
   start: Date;
   end: Date;
-  progress: number;
+  progress?: number;
   type: AppTaskType;
   isOpen?: boolean;
   parent?: string;
