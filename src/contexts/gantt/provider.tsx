@@ -1,6 +1,8 @@
 import { useReducer, useState } from 'react';
 import { GanttContext, type GanttState } from './context';
-import type { AppLink, AppScale, AppTask } from './types';
+import type { AppTask } from './types';
+import type { IApi } from '@svar-ui/react-gantt';
+import { maptoSVARGanttTask } from './utils/mapToSVARGantt';
 
 type GanttProviderProps = {
   children: React.ReactNode;
@@ -73,7 +75,15 @@ export function GanttProvider({ children }: GanttProviderProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addTask = (task: AppTask) => {
+    // 1. Update state
     dispatch({ type: 'ADD_TASK', payload: task });
+
+    // 2. Update Gantt UI
+    if (!ganttApi) return;
+    const newTask = maptoSVARGanttTask(task);
+    ganttApi.exec('add-task', {
+      task: newTask,
+    });
   };
 
   const updateTask = (task: AppTask) => {
