@@ -1,30 +1,36 @@
-import { Gantt, Willow, WillowDark } from '@svar-ui/react-gantt';
+import { Gantt, Willow, WillowDark, type IApi } from '@svar-ui/react-gantt';
 import '@svar-ui/react-gantt/all.css';
-import { useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { ThemeContext } from '../../contexts/themeContext/context';
 import { ThemeModes } from '../../types/theme.model';
-import { Box } from '@mui/material';
-import { useGanttState } from './hooks/useGanttState';
+import Box from '@mui/material/Box';
 import './GanttChart.module.css';
 import {
   maptoSVARGanttLinks,
   maptoSVARGanttScales,
   mapToSVARGanttTasks,
-} from './utils/mapToSVARGantt';
+} from '../../contexts/gantt/utils/mapToSVARGantt';
+import { useGanttContext } from '../../contexts/gantt/context';
 
 export default function GanttChart() {
   const { mode } = useContext(ThemeContext);
-  const { state } = useGanttState();
+  const { state, setGanttApi } = useGanttContext();
 
-  const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), []);
-  const links = useMemo(() => maptoSVARGanttLinks(state.links), []);
-  const scales = useMemo(() => maptoSVARGanttScales(state.scales), []);
+  const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), [state.tasks]);
+  const links = useMemo(() => maptoSVARGanttLinks(state.links), [state.links]);
+  const scales = useMemo(() => maptoSVARGanttScales(state.scales), [state.scales]);
+
+  const init = useCallback((ganttApiInstance: IApi) => {
+    setGanttApi(ganttApiInstance);
+  }, []);
 
   const renderLightTheme = useMemo(
     () => (
-      <Willow>
-        <Gantt tasks={tasks} links={links} scales={scales} />
-      </Willow>
+      <>
+        <Willow>
+          <Gantt init={init} tasks={tasks} links={links} scales={scales} />
+        </Willow>
+      </>
     ),
     [],
   );
@@ -32,7 +38,7 @@ export default function GanttChart() {
   const renderDarkTheme = useMemo(
     () => (
       <WillowDark>
-        <Gantt tasks={tasks} links={links} scales={scales} />
+        <Gantt init={init} tasks={tasks} links={links} scales={scales} />
       </WillowDark>
     ),
     [],

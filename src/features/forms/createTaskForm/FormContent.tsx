@@ -1,10 +1,15 @@
-import Box from '@mui/material/Box';
-import { FormDateTimePicker } from '../../../components/forms/FormDateTimePicker';
-import TextField from '@mui/material/TextField';
-import { CreateTaskFormFields, type CreateTaskFormValues } from './CreateTaskFormConfig';
 import { useFormikContext } from 'formik';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
+import { FormDateTimePicker } from '../../../components/forms/FormDateTimePicker';
+import {
+  CreateTaskFormFields,
+  TASK_TYPE_OPTIONS,
+  type CreateTaskFormValues,
+} from './CreateTaskFormConfig';
+import { FormSelect } from '../../../components/forms/FormSelect';
 
 export default function FormContent() {
   const { values, handleChange } = useFormikContext<CreateTaskFormValues>();
@@ -34,6 +39,9 @@ export default function FormContent() {
       </Box>
 
       {/* Type */}
+      <Box sx={{ display: 'flex', mt: 3 }}>
+        <FormSelect name={CreateTaskFormFields.TYPE} label="Type" options={TASK_TYPE_OPTIONS} />
+      </Box>
 
       {/* Start End Time */}
       <Box sx={{ display: 'flex', mt: 3 }}>

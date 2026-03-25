@@ -3,9 +3,12 @@ import FormContent from './FormContent';
 import { CreateTaskFormFields, type CreateTaskFormValues } from './CreateTaskFormConfig';
 import { useCallback, useMemo } from 'react';
 import { useRightDrawer } from '../../../contexts/rightDrawer/context';
+import { useGanttContext } from '../../../contexts/gantt/context';
+import type { AppTask, AppTaskType } from '../../../contexts/gantt/types';
 
 export default function CreateTaskForm() {
   const { closeDrawer } = useRightDrawer();
+  const { addTask } = useGanttContext();
 
   const initialValues: CreateTaskFormValues = useMemo(
     () => ({
@@ -19,6 +22,16 @@ export default function CreateTaskForm() {
 
   const handleSubmit = useCallback((values: CreateTaskFormValues) => {
     console.log(values);
+    const newTask: AppTask = {
+      taskId: '',
+      title: values[CreateTaskFormFields.TITLE] as string,
+      type: values[CreateTaskFormFields.TYPE] as AppTaskType,
+      start: new Date(values[CreateTaskFormFields.START]),
+      end: new Date(values[CreateTaskFormFields.END]),
+    };
+
+    addTask(newTask);
+
     closeDrawer();
   }, []);
 

@@ -6,14 +6,14 @@
 // -----------------
 export type AppTaskType = 'task' | 'summary' | 'milestone'; // maps to SVAR ITaskType
 export interface AppTask {
-  taskId: number; // maps to SVAR ITask - id
+  taskId: string; // maps to SVAR ITask - id
   title: string; // maps to SVAR ITask - text
   start: Date;
   end: Date;
-  progress: number;
+  progress?: number;
   type: AppTaskType;
   isOpen?: boolean;
-  parent?: number;
+  parent?: string;
 }
 
 // Links
@@ -34,10 +34,4 @@ export interface AppScale {
   unit: string;
   step: number;
   format: string;
-}
-
-export interface GanttState {
-  tasks: AppTask[];
-  links: AppLink[];
-  scales: AppScale[];
 }
