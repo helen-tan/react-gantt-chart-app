@@ -1,5 +1,5 @@
 import type { FormSelectOption } from '../../../components/forms/FormSelect';
-import type { AppTaskType } from '../../ganttChart/types';
+import type { AppTaskType } from '../../../contexts/gantt/types';
 
 export const CreateTaskFormFields = {
   TITLE: 'title',
