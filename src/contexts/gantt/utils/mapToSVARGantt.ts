@@ -1,8 +1,10 @@
 import type { ILink, IScaleConfig, ITask } from '@svar-ui/react-gantt';
 import type { AppLink, AppScale, AppTask } from '../types';
 
-const mapToSVARGanttTasks = (tasks: AppTask[]): ITask[] => {
-  return tasks.map((task) => ({
+// TASKS
+// --------------------
+const maptoSVARGanttTask = (task: AppTask): ITask => {
+  return {
     id: task.taskId,
     text: task.title,
     start: task.start,
@@ -11,9 +13,15 @@ const mapToSVARGanttTasks = (tasks: AppTask[]): ITask[] => {
     type: task.type,
     open: task.isOpen,
     parent: task.parent,
-  }));
+  };
 };
 
+const mapToSVARGanttTasks = (tasks: AppTask[]): ITask[] => {
+  return tasks.map((task) => maptoSVARGanttTask(task));
+};
+
+// LINKS
+// --------------------
 const maptoSVARGanttLinks = (links: AppLink[]): ILink[] => {
   return links.map((link) => ({
     id: link.linkId,
@@ -23,6 +31,8 @@ const maptoSVARGanttLinks = (links: AppLink[]): ILink[] => {
   }));
 };
 
+// SCALES
+// --------------------
 const maptoSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
   return scales.map((scale) => ({
     unit: scale.unit,
@@ -31,4 +41,4 @@ const maptoSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
   }));
 };
 
-export { mapToSVARGanttTasks, maptoSVARGanttLinks, maptoSVARGanttScales };
+export { maptoSVARGanttTask, mapToSVARGanttTasks, maptoSVARGanttLinks, maptoSVARGanttScales };
