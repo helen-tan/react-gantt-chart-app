@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import { GanttContext, type GanttState } from './context';
 import type { AppLink, AppScale, AppTask } from './types';
 
@@ -69,6 +69,7 @@ const reducer = (state: GanttState, action: GanttAction) => {
 };
 
 export function GanttProvider({ children }: GanttProviderProps) {
+  const [ganttApi, setGanttApi] = useState<IApi | null>(null);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addTask = (task: AppTask) => {
@@ -84,7 +85,9 @@ export function GanttProvider({ children }: GanttProviderProps) {
   };
 
   return (
-    <GanttContext.Provider value={{ state, addTask, updateTask, deleteTask }}>
+    <GanttContext.Provider
+      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask }}
+    >
       {children}
     </GanttContext.Provider>
   );

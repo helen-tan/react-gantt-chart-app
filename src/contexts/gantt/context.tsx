@@ -1,5 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { AppLink, AppScale, AppTask } from './types';
+import type { IApi } from '@svar-ui/react-gantt';
 
 export interface GanttState {
   tasks: AppTask[];
@@ -12,6 +13,9 @@ export interface GanttContextType {
   addTask: (task: AppTask) => void;
   updateTask: (task: AppTask) => void;
   deleteTask: (taskId: string) => void;
+
+  ganttApi: IApi | null;
+  setGanttApi: (api: IApi) => void;
 }
 
 export const GanttContext = createContext<GanttContextType | undefined>(undefined);
