@@ -11,6 +11,7 @@ import {
   mapToSVARGanttTasks,
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
+import { columns } from './GanttConfig';
 
 export default function GanttChart() {
   const { mode } = useContext(ThemeContext);
@@ -28,7 +29,7 @@ export default function GanttChart() {
     () => (
       <>
         <Willow>
-          <Gantt init={init} tasks={tasks} links={links} scales={scales} />
+          <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
         </Willow>
       </>
     ),
@@ -38,7 +39,7 @@ export default function GanttChart() {
   const renderDarkTheme = useMemo(
     () => (
       <WillowDark>
-        <Gantt init={init} tasks={tasks} links={links} scales={scales} />
+        <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
       </WillowDark>
     ),
     [],
