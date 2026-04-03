@@ -71,7 +71,7 @@ const reducer = (state: GanttState, action: GanttAction) => {
 };
 
 export function GanttProvider({ children }: GanttProviderProps) {
-  const [ganttApi, setGanttApi] = useState<IApi | null>(null);
+  const [ganttApi, setGanttApi] = useState<IApi | undefined>(undefined);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addTask = (task: AppTask) => {
