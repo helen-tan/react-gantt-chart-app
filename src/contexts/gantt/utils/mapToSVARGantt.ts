@@ -7,8 +7,8 @@ const maptoSVARGanttTask = (task: AppTask): ITask => {
   return {
     id: task.taskId,
     text: task.title,
-    start: task.start,
-    end: task.end,
+    start: new Date(task.start),
+    end: new Date(task.end),
     progress: task.progress,
     type: task.type,
     open: task.isOpen,

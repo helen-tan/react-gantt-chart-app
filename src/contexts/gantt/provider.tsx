@@ -3,6 +3,7 @@ import { GanttContext, type GanttState } from './context';
 import type { AppTask } from './types';
 import type { IApi } from '@svar-ui/react-gantt';
 import { maptoSVARGanttTask } from './utils/mapToSVARGantt';
+import moment from 'moment';
 
 type GanttProviderProps = {
   children: React.ReactNode;
@@ -13,8 +14,8 @@ const initialState: GanttState = {
     {
       taskId: '123',
       title: 'Test Task 1',
-      start: new Date(2024, 0, 1),
-      end: new Date(2024, 0, 10),
+      start: moment().valueOf(),
+      end: moment().add(5, 'days').valueOf(),
       progress: 100,
       type: 'task',
       isOpen: true,
@@ -22,8 +23,8 @@ const initialState: GanttState = {
     {
       taskId: '456',
       title: 'Test Task 2',
-      start: new Date(2024, 0, 1),
-      end: new Date(2024, 0, 5),
+      start: moment().valueOf(),
+      end: moment().add(5, 'days').valueOf(),
       progress: 100,
       type: 'summary',
       parent: '123',
