@@ -16,6 +16,8 @@ export interface GanttContextType {
 
   ganttApi: IApi | undefined;
   setGanttApi: (api: IApi) => void;
+
+  getTaskById: (taskId: string) => AppTask | undefined;
 }
 
 export const GanttContext = createContext<GanttContextType | undefined>(undefined);

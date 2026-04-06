@@ -95,9 +95,14 @@ export function GanttProvider({ children }: GanttProviderProps) {
     dispatch({ type: 'DELETE_TASK', payload: taskId });
   };
 
+  const getTaskById = (taskId: string) => {
+    const found = state.tasks.find((t) => t.taskId === taskId.toString());
+    return found;
+  };
+
   return (
     <GanttContext.Provider
-      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask }}
+      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask, getTaskById }}
     >
       {children}
     </GanttContext.Provider>
