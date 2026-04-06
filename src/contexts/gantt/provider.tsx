@@ -88,7 +88,21 @@ export function GanttProvider({ children }: GanttProviderProps) {
   };
 
   const updateTask = (task: AppTask) => {
+    // 1. Update state
     dispatch({ type: 'UPDATE_TASK', payload: task });
+
+    // 2. Update Gantt UI
+    if (!ganttApi) return;
+    // const updatedTask: ITask = maptoSVARGanttTask(task);
+    ganttApi.exec('update-task', {
+      id: task.taskId.toString(),
+      task: {
+        text: task.title,
+        start: new Date(task.start),
+        end: new Date(task.end),
+        type: task.type,
+      },
+    });
   };
 
   const deleteTask = (taskId: string) => {
