@@ -3,6 +3,7 @@ import { GanttContext, type GanttState } from './context';
 import type { AppTask } from './types';
 import type { IApi } from '@svar-ui/react-gantt';
 import { maptoSVARGanttTask } from './utils/mapToSVARGantt';
+import moment from 'moment';
 
 type GanttProviderProps = {
   children: React.ReactNode;
@@ -13,8 +14,8 @@ const initialState: GanttState = {
     {
       taskId: '123',
       title: 'Test Task 1',
-      start: new Date(2024, 0, 1),
-      end: new Date(2024, 0, 10),
+      start: moment().valueOf(),
+      end: moment().add(5, 'days').valueOf(),
       progress: 100,
       type: 'task',
       isOpen: true,
@@ -22,8 +23,8 @@ const initialState: GanttState = {
     {
       taskId: '456',
       title: 'Test Task 2',
-      start: new Date(2024, 0, 1),
-      end: new Date(2024, 0, 5),
+      start: moment().valueOf(),
+      end: moment().add(5, 'days').valueOf(),
       progress: 100,
       type: 'summary',
       parent: '123',
@@ -71,7 +72,7 @@ const reducer = (state: GanttState, action: GanttAction) => {
 };
 
 export function GanttProvider({ children }: GanttProviderProps) {
-  const [ganttApi, setGanttApi] = useState<IApi | null>(null);
+  const [ganttApi, setGanttApi] = useState<IApi | undefined>(undefined);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const addTask = (task: AppTask) => {
@@ -87,16 +88,35 @@ export function GanttProvider({ children }: GanttProviderProps) {
   };
 
   const updateTask = (task: AppTask) => {
+    // 1. Update state
     dispatch({ type: 'UPDATE_TASK', payload: task });
+
+    // 2. Update Gantt UI
+    if (!ganttApi) return;
+    // const updatedTask: ITask = maptoSVARGanttTask(task);
+    ganttApi.exec('update-task', {
+      id: task.taskId.toString(),
+      task: {
+        text: task.title,
+        start: new Date(task.start),
+        end: new Date(task.end),
+        type: task.type,
+      },
+    });
   };
 
   const deleteTask = (taskId: string) => {
     dispatch({ type: 'DELETE_TASK', payload: taskId });
   };
 
+  const getTaskById = (taskId: string) => {
+    const found = state.tasks.find((t) => t.taskId === taskId.toString());
+    return found;
+  };
+
   return (
     <GanttContext.Provider
-      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask }}
+      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask, getTaskById }}
     >
       {children}
     </GanttContext.Provider>

@@ -11,7 +11,11 @@ import {
 } from './CreateTaskFormConfig';
 import { FormSelect } from '../../../components/forms/FormSelect';
 
-export default function FormContent() {
+type FormContentProps = {
+  mode: 'create' | 'edit';
+};
+
+export default function FormContent({ mode }: FormContentProps) {
   const { values, handleChange } = useFormikContext<CreateTaskFormValues>();
 
   return (
@@ -24,7 +28,8 @@ export default function FormContent() {
       }}
     >
       <Box sx={{ display: 'flex', padding: '1rem' }}>
-        <Typography variant="h5">Create Task</Typography>
+        {mode === 'create' && <Typography variant="h5">Create Task</Typography>}
+        {mode === 'edit' && <Typography variant="h5">Edit Task</Typography>}
       </Box>
 
       {/* Title */}

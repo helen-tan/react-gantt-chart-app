@@ -1,4 +1,4 @@
-import { Gantt, Willow, WillowDark, type IApi } from '@svar-ui/react-gantt';
+import { Gantt, Willow, WillowDark, type IApi, type ITask } from '@svar-ui/react-gantt';
 import '@svar-ui/react-gantt/all.css';
 import { useCallback, useContext, useMemo } from 'react';
 import { ThemeContext } from '../../contexts/themeContext/context';
@@ -12,10 +12,14 @@ import {
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
 import { columns } from './GanttConfig';
+import { useRightDrawer } from '../../contexts/rightDrawer/context';
+import { registerGanttEvents } from './registerGanttEvents';
 
 export default function GanttChart() {
   const { mode } = useContext(ThemeContext);
   const { state, setGanttApi } = useGanttContext();
+
+  const { openDrawer } = useRightDrawer();
 
   const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), [state.tasks]);
   const links = useMemo(() => maptoSVARGanttLinks(state.links), [state.links]);
@@ -23,6 +27,7 @@ export default function GanttChart() {
 
   const init = useCallback((ganttApiInstance: IApi) => {
     setGanttApi(ganttApiInstance);
+    registerGanttEvents(ganttApiInstance, { openDrawer });
   }, []);
 
   const renderLightTheme = useMemo(

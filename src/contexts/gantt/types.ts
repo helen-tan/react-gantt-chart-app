@@ -5,11 +5,12 @@
 // Tasks
 // -----------------
 export type AppTaskType = 'task' | 'summary' | 'milestone'; // maps to SVAR ITaskType
+
 export interface AppTask {
   taskId: string; // maps to SVAR ITask - id
   title: string; // maps to SVAR ITask - text
-  start: Date;
-  end: Date;
+  start: number;
+  end: number;
   progress?: number;
   type: AppTaskType;
   isOpen?: boolean;

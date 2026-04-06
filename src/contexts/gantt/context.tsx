@@ -14,8 +14,10 @@ export interface GanttContextType {
   updateTask: (task: AppTask) => void;
   deleteTask: (taskId: string) => void;
 
-  ganttApi: IApi | null;
+  ganttApi: IApi | undefined;
   setGanttApi: (api: IApi) => void;
+
+  getTaskById: (taskId: string) => AppTask | undefined;
 }
 
 export const GanttContext = createContext<GanttContextType | undefined>(undefined);
