@@ -1,4 +1,4 @@
-import type { IApi } from '@svar-ui/react-gantt';
+import type { IApi, TID } from '@svar-ui/react-gantt';
 import CreateTaskForm from '../forms/createTaskForm/CreateTaskForm';
 import { RightDrawerSizes, type RightDrawerSize } from '../../contexts/rightDrawer/config';
 
@@ -12,11 +12,12 @@ export function registerGanttEvents(ganttApi: IApi, dependencies: RegisterGanttE
   const { openDrawer } = dependencies;
 
   // -------- Mouse Event Handlers --------
-  const handleTaskDoubleClick = () => {
-    openDrawer(<CreateTaskForm />, RightDrawerSizes.M);
-    return false;
+  const handleTaskDoubleClick = (task: { id: TID }) => {
+    const taskId = task.id as string;
+
+    openDrawer(<CreateTaskForm mode="edit" existingTaskId={taskId} />, RightDrawerSizes.M);
   };
 
   // -------- Detect Gantt Event --------
-  ganttApi.on('show-editor', handleTaskDoubleClick);
+  ganttApi.on('show-editor', (task: { id: TID }) => handleTaskDoubleClick(task));
 }
