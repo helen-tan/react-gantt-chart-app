@@ -3,42 +3,42 @@ import { v4 as uuidv4 } from 'uuid';
 import { Form } from '../../../components/forms/Form';
 import FormContent from './FormContent';
 import {
-  CreateTaskFormFields,
+  TaskEditorFormFields,
   TASK_TYPE_OPTIONS,
-  type CreateTaskFormValues,
-} from './CreateTaskFormConfig';
+  type TaskEditorFormValues,
+} from './TaskEditorFormConfig';
 import { useRightDrawer } from '../../../contexts/rightDrawer/context';
 import { useGanttContext } from '../../../contexts/gantt/context';
 import type { AppTask } from '../../../contexts/gantt/types';
 import moment from 'moment';
 
-type CreateTaskFormProps = {
+type TaskEditorFormProps = {
   mode?: 'create' | 'edit';
   existingTaskId?: string;
 };
 
-export default function CreateTaskForm({
+export default function TaskEditorForm({
   mode = 'create',
   existingTaskId = '',
-}: CreateTaskFormProps) {
+}: TaskEditorFormProps) {
   const { closeDrawer } = useRightDrawer();
   const { getTaskById, addTask, updateTask } = useGanttContext();
 
   const task = mode === 'edit' ? getTaskById(existingTaskId) : undefined;
 
-  const initialValues: CreateTaskFormValues = useMemo(() => {
+  const initialValues: TaskEditorFormValues = useMemo(() => {
     const now = moment().valueOf();
     const defaultEnd = moment().add(1, 'days').valueOf();
 
     return {
-      [CreateTaskFormFields.TITLE]: task?.title ?? '',
-      [CreateTaskFormFields.TYPE]: task?.type ?? TASK_TYPE_OPTIONS[0].value,
-      [CreateTaskFormFields.START]: task?.start ?? now,
-      [CreateTaskFormFields.END]: task?.end ?? defaultEnd,
+      [TaskEditorFormFields.TITLE]: task?.title ?? '',
+      [TaskEditorFormFields.TYPE]: task?.type ?? TASK_TYPE_OPTIONS[0].value,
+      [TaskEditorFormFields.START]: task?.start ?? now,
+      [TaskEditorFormFields.END]: task?.end ?? defaultEnd,
     };
   }, [task]);
 
-  const handleSubmit = useCallback((values: CreateTaskFormValues) => {
+  const handleSubmit = useCallback((values: TaskEditorFormValues) => {
     console.log(values);
     const { title, type, start, end } = values;
 
