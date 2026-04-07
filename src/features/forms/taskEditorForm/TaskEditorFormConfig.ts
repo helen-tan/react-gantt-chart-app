@@ -1,20 +1,20 @@
 import type { AppTaskType } from '../../../contexts/gantt/types';
 
-export const CreateTaskFormFields = {
+export const TaskEditorFormFields = {
   TITLE: 'title',
   START: 'start',
   END: 'end',
   TYPE: 'type',
 } as const;
 
-// export type CreateTaskFormValues = {
-//   [CreateTaskFormFields.TITLE]: string;
-//   [CreateTaskFormFields.START]: number;
-//   [CreateTaskFormFields.END]: number;
-//   [CreateTaskFormFields.TYPE]: string;
+// export type TaskEditorFormFields = {
+//   [TaskEditorFormields.TITLE]: string;
+//   [TaskEditorFormields.START]: number;
+//   [TaskEditorFormields.END]: number;
+//   [TaskEditorFormields.TYPE]: string;
 // };
 
-export type CreateTaskFormValues = {
+export type TaskEditorFormValues = {
   title: string;
   start: number;
   end: number;
