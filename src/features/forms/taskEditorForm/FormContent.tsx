@@ -5,18 +5,19 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { FormDateTimePicker } from '../../../components/forms/FormDateTimePicker';
 import {
-  CreateTaskFormFields,
+  TaskEditorFormFields,
   TASK_TYPE_OPTIONS,
-  type CreateTaskFormValues,
-} from './CreateTaskFormConfig';
+  type TaskEditorFormValues,
+} from './TaskEditorFormConfig';
 import { FormSelect } from '../../../components/forms/FormSelect';
+import FormControl from '@mui/material/FormControl';
 
 type FormContentProps = {
   mode: 'create' | 'edit';
 };
 
 export default function FormContent({ mode }: FormContentProps) {
-  const { values, handleChange } = useFormikContext<CreateTaskFormValues>();
+  const { values, handleChange } = useFormikContext<TaskEditorFormValues>();
 
   return (
     <Box
@@ -35,28 +36,33 @@ export default function FormContent({ mode }: FormContentProps) {
       {/* Title */}
       <Box sx={{ mt: 2 }}>
         <TextField
-          name={CreateTaskFormFields.TITLE}
+          name={TaskEditorFormFields.TITLE}
           label="Title"
-          value={values[CreateTaskFormFields.TITLE]}
+          value={values[TaskEditorFormFields.TITLE]}
           onChange={handleChange}
           fullWidth
         />
       </Box>
 
       {/* Type */}
-      <Box sx={{ display: 'flex', mt: 3 }}>
-        <FormSelect name={CreateTaskFormFields.TYPE} label="Type" options={TASK_TYPE_OPTIONS} />
-      </Box>
+      {/* <Box sx={{ display: 'flex', mt: 3 }}>
+      </Box> */}
+      <FormControl sx={{ mt: 3 }}>
+        <FormSelect name={TaskEditorFormFields.TYPE} label="Type" options={TASK_TYPE_OPTIONS} />
+      </FormControl>
 
       {/* Start End Time */}
-      <Box sx={{ display: 'flex', mt: 3 }}>
-        <FormDateTimePicker name={CreateTaskFormFields.START} label="Start Time" />
-        <FormDateTimePicker name={CreateTaskFormFields.END} label="End Time" sx={{ ml: 1 }} />
-      </Box>
+      <FormControl sx={{ mt: 3 }}>
+        <FormDateTimePicker name={TaskEditorFormFields.START} label="Start Time" />
+      </FormControl>
+
+      <FormControl sx={{ mt: 3 }}>
+        <FormDateTimePicker name={TaskEditorFormFields.END} label="End Time" />
+      </FormControl>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
         <Button type="submit" variant="contained">
-          Submit
+          {mode === 'create' ? 'Create' : 'Edit'}
         </Button>
       </Box>
     </Box>
