@@ -21,9 +21,9 @@ export default function GanttChart() {
 
   const { openDrawer } = useRightDrawer();
 
-  const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), [state.tasks]);
-  const links = useMemo(() => maptoSVARGanttLinks(state.links), [state.links]);
-  const scales = useMemo(() => maptoSVARGanttScales(state.scales), [state.scales]);
+  const tasks = mapToSVARGanttTasks(state.tasks);
+  const links = maptoSVARGanttLinks(state.links);
+  const scales = maptoSVARGanttScales(state.scales);
 
   const init = useCallback((ganttApiInstance: IApi) => {
     setGanttApi(ganttApiInstance);
