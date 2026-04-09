@@ -106,7 +106,12 @@ export function GanttProvider({ children }: GanttProviderProps) {
   };
 
   const deleteTask = (taskId: string) => {
+    // 1. Update state
     dispatch({ type: 'DELETE_TASK', payload: taskId });
+
+    // 2. Update Gantt UI
+    if (!ganttApi) return;
+    ganttApi.exec('delete-task', { id: taskId });
   };
 
   const getTaskById = (taskId: string) => {
