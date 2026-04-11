@@ -3,7 +3,7 @@ import type { AppLink, AppScale, AppTask } from '../types';
 
 // TASKS
 // --------------------
-const maptoSVARGanttTask = (task: AppTask): ITask => {
+const mapToSVARGanttTask = (task: AppTask): ITask => {
   return {
     id: task.taskId,
     text: task.title,
@@ -17,12 +17,12 @@ const maptoSVARGanttTask = (task: AppTask): ITask => {
 };
 
 const mapToSVARGanttTasks = (tasks: AppTask[]): ITask[] => {
-  return tasks.map((task) => maptoSVARGanttTask(task));
+  return tasks.map((task) => mapToSVARGanttTask(task));
 };
 
 // LINKS
 // --------------------
-const maptoSVARGanttLinks = (links: AppLink[]): ILink[] => {
+const mapToSVARGanttLinks = (links: AppLink[]): ILink[] => {
   return links.map((link) => ({
     id: link.linkId,
     source: link.source,
@@ -33,7 +33,7 @@ const maptoSVARGanttLinks = (links: AppLink[]): ILink[] => {
 
 // SCALES
 // --------------------
-const maptoSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
+const mapToSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
   return scales.map((scale) => ({
     unit: scale.unit,
     step: scale.step,
@@ -41,4 +41,4 @@ const maptoSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
   }));
 };
 
-export { maptoSVARGanttTask, mapToSVARGanttTasks, maptoSVARGanttLinks, maptoSVARGanttScales };
+export { mapToSVARGanttTask, mapToSVARGanttTasks, mapToSVARGanttLinks, mapToSVARGanttScales };

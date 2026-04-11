@@ -2,7 +2,7 @@ import { useReducer, useState } from 'react';
 import { GanttContext, type GanttState } from './context';
 import type { AppTask } from './types';
 import type { IApi } from '@svar-ui/react-gantt';
-import { maptoSVARGanttTask } from './utils/mapToSVARGantt';
+import { mapToSVARGanttTask } from './utils/mapToSVARGantt';
 import moment from 'moment';
 
 type GanttProviderProps = {
@@ -81,7 +81,7 @@ export function GanttProvider({ children }: GanttProviderProps) {
 
     // 2. Update Gantt UI
     if (!ganttApi) return;
-    const newTask = maptoSVARGanttTask(task);
+    const newTask = mapToSVARGanttTask(task);
     ganttApi.exec('add-task', {
       task: newTask,
     });
