@@ -6,8 +6,8 @@ import { ThemeModes } from '../../types/theme.model';
 import Box from '@mui/material/Box';
 import './GanttChart.module.css';
 import {
-  maptoSVARGanttLinks,
-  maptoSVARGanttScales,
+  mapToSVARGanttLinks,
+  mapToSVARGanttScales,
   mapToSVARGanttTasks,
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
@@ -22,8 +22,8 @@ export default function GanttChart() {
   const { openDrawer } = useRightDrawer();
 
   const tasks = mapToSVARGanttTasks(state.tasks);
-  const links = maptoSVARGanttLinks(state.links);
-  const scales = maptoSVARGanttScales(state.scales);
+  const links = mapToSVARGanttLinks(state.links);
+  const scales = mapToSVARGanttScales(state.scales);
 
   const init = useCallback((ganttApiInstance: IApi) => {
     setGanttApi(ganttApiInstance);

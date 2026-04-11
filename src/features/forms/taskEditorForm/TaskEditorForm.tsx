@@ -24,7 +24,14 @@ export default function TaskEditorForm({
   const { closeDrawer } = useRightDrawer();
   const { getTaskById, addTask, updateTask } = useGanttContext();
 
-  const task = mode === 'edit' ? getTaskById(existingTaskId) : undefined;
+  // const task = mode === 'edit' ? getTaskById(existingTaskId) : undefined;
+
+  const task = useMemo(() => {
+    if (mode === 'edit') {
+      return getTaskById(existingTaskId);
+    }
+    return undefined;
+  }, []);
 
   const initialValues: TaskEditorFormValues = useMemo(() => {
     const now = moment().valueOf();
@@ -61,7 +68,7 @@ export default function TaskEditorForm({
 
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>
-      <FormContent mode={mode} />
+      <FormContent mode={mode} task={task} />
     </Form>
   );
 }
