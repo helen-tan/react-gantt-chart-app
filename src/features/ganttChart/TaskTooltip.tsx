@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import type { ITask } from '@svar-ui/react-gantt';
 import type { AppTask } from '../../contexts/gantt/types';
 import { useEffect, useMemo } from 'react';
+import moment from 'moment';
 
 export type GanttTooltipData = {
   data: ITask;
@@ -26,12 +27,16 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
 
   if (!data) return null;
 
+  const formatDate = (date: Date) => {
+    return moment(date).format('DD MMM YYYY, HH:mm');
+  };
+
   const task: ToolTipTaskData = useMemo(
     () => ({
       title: data.text ?? '-',
       type: data.type ?? '-',
-      start: data.start ? data.start.toLocaleDateString() : new Date().toLocaleDateString(),
-      end: data.end ? data.end.toLocaleDateString() : new Date().toLocaleDateString(),
+      start: data.start ? formatDate(data.start) : new Date().toLocaleDateString(),
+      end: data.end ? formatDate(data.end) : new Date().toLocaleDateString(),
     }),
     [],
   );
@@ -40,7 +45,7 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
     <Paper
       elevation={0}
       sx={{
-        width: 180,
+        width: 200,
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
         p: 1.5,
