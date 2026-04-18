@@ -1,4 +1,4 @@
-import { Gantt, Willow, WillowDark, type IApi, type ITask } from '@svar-ui/react-gantt';
+import { Gantt, Tooltip, Willow, WillowDark, type IApi, type ITask } from '@svar-ui/react-gantt';
 import '@svar-ui/react-gantt/all.css';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ThemeContext } from '../../contexts/themeContext/context';
@@ -14,11 +14,12 @@ import { useGanttContext } from '../../contexts/gantt/context';
 import { columns } from './GanttConfig';
 import { useRightDrawer } from '../../contexts/rightDrawer/context';
 import { registerGanttEvents } from './registerGanttEvents';
+import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
 
 export default function GanttChart() {
   const [theme, setTheme] = useState<ThemeMode>(ThemeModes.LIGHT);
   const { mode: themeMode } = useContext(ThemeContext);
-  const { state, setGanttApi } = useGanttContext();
+  const { state, setGanttApi, ganttApi } = useGanttContext();
 
   const { openDrawer } = useRightDrawer();
 
@@ -42,10 +43,19 @@ export default function GanttChart() {
     registerGanttEvents(ganttApiInstance, { openDrawer });
   }, []);
 
+  const renderTooltip = useCallback(
+    (args: GanttTooltipData) => {
+      return <TaskTooltip data={args.data} />;
+    },
+    [tasks, links, scales],
+  );
+
   return (
     <Box sx={{ height: '100%', width: '100%' }}>
       <ThemeComponent>
-        <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
+        <Tooltip api={ganttApi} content={(data) => renderTooltip(data)}>
+          <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
+        </Tooltip>
       </ThemeComponent>
     </Box>
   );
