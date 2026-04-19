@@ -25,7 +25,22 @@ type ToolTipTaskData = {
 export default function TaskTooltip({ data }: TaskTooltipProps) {
   const theme = useTheme();
 
-  if (!data) return null;
+  if (!data)
+    return (
+      <Paper
+        elevation={0}
+        sx={{
+          width: 'auto',
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          p: 1.5,
+          borderRadius: 3,
+          boxShadow: 'none',
+        }}
+      >
+        data is null
+      </Paper>
+    );
 
   const formatDate = (date: Date) => {
     return moment(date).format('DD MMM YYYY, HH:mm');
@@ -54,7 +69,16 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
       }}
     >
       <Stack spacing={1}>
-        <Typography fontWeight={700}>{task.title}</Typography>
+        <Typography
+          fontWeight={700}
+          sx={{
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {task.title}
+        </Typography>
+
         <Divider sx={{ color: theme.palette.text.secondary }} />
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="body2" fontWeight={500}>
