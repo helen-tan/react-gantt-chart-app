@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import GanttView from './features/ganttChart/GanttView';
 import Toolbar from './features/toolbar/Toolbar';
+import GanttChart from './features/ganttChart/GanttChart';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       }}
     >
       <Toolbar />
-      <GanttView />
+      <GanttChart />
     </Box>
   );
 }
