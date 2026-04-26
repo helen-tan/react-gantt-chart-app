@@ -3,16 +3,15 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import type { ITask } from '@svar-ui/react-gantt';
-import type { AppTask } from '../../contexts/gantt/types';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import moment from 'moment';
 
 export type GanttTooltipData = {
-  data: ITask;
+  data: ITask | null;
 };
 
 type TaskTooltipProps = {
-  data: ITask;
+  data: ITask | null;
 };
 
 type ToolTipTaskData = {
@@ -53,7 +52,7 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
       start: data.start ? formatDate(data.start) : new Date().toLocaleDateString(),
       end: data.end ? formatDate(data.end) : new Date().toLocaleDateString(),
     }),
-    [],
+    [data],
   );
 
   return (
