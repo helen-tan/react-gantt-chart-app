@@ -43,8 +43,8 @@ export default function GanttChart() {
     registerGanttEvents(ganttApiInstance, { openDrawer });
   }, []);
 
-  const renderTooltip = useCallback((args: GanttTooltipData) => {
-    return <TaskTooltip data={args.data} />;
+  const renderTooltip = useCallback(({ data }: GanttTooltipData) => {
+    return data ? <TaskTooltip data={data} /> : null;
   }, []);
 
   return (
