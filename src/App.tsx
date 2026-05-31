@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import Toolbar from './features/toolbar/Toolbar';
 import GanttChart from './features/ganttChart/GanttChart';
+import GanttEventBridge from './features/events/GanttEventBridge';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
     >
       <Toolbar />
       <GanttChart />
+      <GanttEventBridge />
     </Box>
   );
 }
