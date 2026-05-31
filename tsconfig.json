@@ -1,7 +1,27 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "target": "ES2022",
+    "module": "ESNext",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "useDefineForClassFields": true,
+
+    /* Modules */
+    "moduleDetection": "force",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+
+    /* Linting */
+    "strict": true,
+    // "noUnusedLocals": true, // commented out so that it will be reported by eslint instead of TypeScript
+    // "noUnusedParameters": true,  // commented out so that it will be reported by eslint instead of TypeScript
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": ["src"]
 }
