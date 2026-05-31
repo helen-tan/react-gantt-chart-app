@@ -16,7 +16,7 @@ import { useRightDrawer } from '../../contexts/rightDrawer/context';
 import { registerGanttEvents } from './registerGanttEvents';
 import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
 
-export default function GanttChart() {
+function GanttChart() {
   const [theme, setTheme] = useState<ThemeMode>(ThemeModes.LIGHT);
   const { mode: themeMode } = useContext(ThemeContext);
   const { state, ganttApi, setGanttApi } = useGanttContext();
@@ -57,3 +57,5 @@ export default function GanttChart() {
     </Box>
   );
 }
+
+export default React.memo(GanttChart); // React to skip rerender if component recieves stable props
