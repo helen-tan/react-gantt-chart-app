@@ -1,3 +1,4 @@
+import React from 'react';
 import { Gantt, Tooltip, Willow, WillowDark, type IApi } from '@svar-ui/react-gantt';
 import '@svar-ui/react-gantt/all.css';
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
@@ -12,16 +13,13 @@ import {
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
 import { columns } from './GanttConfig';
-import { useRightDrawer } from '../../contexts/rightDrawer/context';
 import { registerGanttEvents } from './registerGanttEvents';
 import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
 
-export default function GanttChart() {
+function GanttChart() {
   const [theme, setTheme] = useState<ThemeMode>(ThemeModes.LIGHT);
   const { mode: themeMode } = useContext(ThemeContext);
   const { state, ganttApi, setGanttApi } = useGanttContext();
-
-  const { openDrawer } = useRightDrawer();
 
   useEffect(() => {
     setTheme(themeMode);
@@ -40,7 +38,7 @@ export default function GanttChart() {
 
   const init = useCallback((ganttApiInstance: IApi) => {
     setGanttApi(ganttApiInstance);
-    registerGanttEvents(ganttApiInstance, { openDrawer });
+    registerGanttEvents(ganttApiInstance);
   }, []);
 
   const renderTooltip = useCallback(({ data }: GanttTooltipData) => {
@@ -57,3 +55,5 @@ export default function GanttChart() {
     </Box>
   );
 }
+
+export default React.memo(GanttChart); // React to skip rerender if component recieves stable props

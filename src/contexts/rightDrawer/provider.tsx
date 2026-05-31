@@ -65,7 +65,6 @@ export function RightDrawerProvider({ children }: RightDrawerProviderProps) {
   return (
     <RightDrawerContext.Provider
       value={{
-        isOpen,
         openDrawer,
         closeDrawer,
       }}
