@@ -11,7 +11,7 @@ import {
   mapToSVARGanttTasks,
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
-import { columns } from './GanttConfig';
+import { columns, scales } from './GanttConfig';
 import { registerGanttEvents } from './registerGanttEvents';
 import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
 
