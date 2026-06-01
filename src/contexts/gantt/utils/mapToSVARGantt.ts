@@ -1,5 +1,5 @@
 import type { ILink, IScaleConfig, ITask } from '@svar-ui/react-gantt';
-import type { AppLink, AppScale, AppTask } from '../types';
+import type { AppLink, AppTask } from '../types';
 
 // TASKS
 // --------------------
@@ -31,14 +31,4 @@ const mapToSVARGanttLinks = (links: AppLink[]): ILink[] => {
   }));
 };
 
-// SCALES
-// --------------------
-const mapToSVARGanttScales = (scales: AppScale[]): IScaleConfig[] => {
-  return scales.map((scale) => ({
-    unit: scale.unit,
-    step: scale.step,
-    format: scale.format,
-  }));
-};
-
-export { mapToSVARGanttTask, mapToSVARGanttTasks, mapToSVARGanttLinks, mapToSVARGanttScales };
+export { mapToSVARGanttTask, mapToSVARGanttTasks, mapToSVARGanttLinks };

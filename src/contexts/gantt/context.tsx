@@ -1,11 +1,10 @@
 import { createContext, useContext } from 'react';
-import type { AppLink, AppScale, AppTask } from './types';
+import type { AppLink, AppTask } from './types';
 import type { IApi } from '@svar-ui/react-gantt';
 
 export interface GanttState {
   tasks: AppTask[];
   links: AppLink[];
-  scales: AppScale[];
 }
 
 export interface GanttContextType {
