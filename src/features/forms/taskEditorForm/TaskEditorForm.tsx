@@ -35,7 +35,7 @@ export default function TaskEditorForm({
 
   const initialValues: TaskEditorFormValues = useMemo(() => {
     const now = moment().valueOf();
-    const defaultEnd = moment().add(1, 'days').valueOf();
+    const defaultEnd = moment().add(1, 'hour').valueOf();
 
     return {
       [TaskEditorFormFields.TITLE]: task?.title ?? '',
