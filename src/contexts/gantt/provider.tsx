@@ -15,7 +15,7 @@ const initialState: GanttState = {
       taskId: '123',
       title: 'Test Task 1',
       start: moment().valueOf(),
-      end: moment().add(5, 'days').valueOf(),
+      end: moment().add(1, 'hour').valueOf(),
       progress: 100,
       type: 'task',
       isOpen: true,
@@ -24,18 +24,23 @@ const initialState: GanttState = {
       taskId: '456',
       title: 'Test Task 2',
       start: moment().valueOf(),
-      end: moment().add(5, 'days').valueOf(),
+      end: moment().add(1, 'hour').valueOf(),
       progress: 100,
-      type: 'summary',
+      type: 'task',
       parent: '123',
+    },
+    {
+      taskId: '789',
+      title: 'Test Task 3',
+      start: moment().valueOf(),
+      end: moment().add(1, 'hour').valueOf(),
+      progress: 100,
+      type: 'task',
     },
     // ... more tasks
   ],
-  links: [{ linkId: 1, source: 2, target: 3, type: 'e2s' }],
-  scales: [
-    { unit: 'month', step: 1, format: '%M %Y' },
-    { unit: 'week', step: 1, format: 'Week %w' },
-  ],
+  // links: [{ linkId: 1, source: 2, target: 3, type: 'e2s' }],
+  links: [],
 };
 
 type GanttAction =

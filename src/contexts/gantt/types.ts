@@ -27,12 +27,3 @@ export interface AppLink {
   target: number;
   type: AppLinkType;
 }
-
-// Scales
-// -----------------
-
-export interface AppScale {
-  unit: string;
-  step: number;
-  format: string;
-}

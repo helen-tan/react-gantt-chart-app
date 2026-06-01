@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import './GanttChart.module.css';
 import {
   mapToSVARGanttLinks,
-  mapToSVARGanttScales,
   mapToSVARGanttTasks,
 } from '../../contexts/gantt/utils/mapToSVARGantt';
 import { useGanttContext } from '../../contexts/gantt/context';
@@ -34,7 +33,6 @@ function GanttChart() {
 
   const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), [state.tasks]);
   const links = useMemo(() => mapToSVARGanttLinks(state.links), [state.links]);
-  const scales = useMemo(() => mapToSVARGanttScales(state.scales), [state.scales]);
 
   const init = useCallback((ganttApiInstance: IApi) => {
     setGanttApi(ganttApiInstance);
