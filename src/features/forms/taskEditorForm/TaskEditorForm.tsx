@@ -31,7 +31,7 @@ export default function TaskEditorForm({
       return getTaskById(existingTaskId);
     }
     return undefined;
-  }, []);
+  }, [existingTaskId, getTaskById, mode]);
 
   const initialValues: TaskEditorFormValues = useMemo(() => {
     const now = moment().valueOf();
@@ -45,26 +45,29 @@ export default function TaskEditorForm({
     };
   }, [task]);
 
-  const handleSubmit = useCallback((values: TaskEditorFormValues) => {
-    console.log(values);
-    const { title, type, start, end } = values;
+  const handleSubmit = useCallback(
+    (values: TaskEditorFormValues) => {
+      console.log(values);
+      const { title, type, start, end } = values;
 
-    const task: AppTask = {
-      taskId: mode === 'edit' ? existingTaskId : uuidv4(),
-      title,
-      type,
-      start,
-      end,
-    };
+      const task: AppTask = {
+        taskId: mode === 'edit' ? existingTaskId : uuidv4(),
+        title,
+        type,
+        start,
+        end,
+      };
 
-    if (mode === 'edit') {
-      updateTask(task);
-    } else {
-      addTask(task);
-    }
+      if (mode === 'edit') {
+        updateTask(task);
+      } else {
+        addTask(task);
+      }
 
-    closeDrawer();
-  }, []);
+      closeDrawer();
+    },
+    [addTask, closeDrawer, existingTaskId, mode, updateTask],
+  );
 
   return (
     <Form initialValues={initialValues} onSubmit={handleSubmit}>

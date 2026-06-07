@@ -32,7 +32,7 @@ export default function FormContent({ mode, task }: FormContentProps) {
     if (!task) return;
     deleteTask(task.taskId);
     closeDrawer();
-  }, []);
+  }, [closeDrawer, deleteTask, task]);
 
   return (
     <Box

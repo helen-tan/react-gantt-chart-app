@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useRightDrawer } from '../../contexts/rightDrawer/context';
 import TaskEditorForm from '../forms/taskEditorForm/TaskEditorForm';
 import { addGanttEventListener } from './eventBus';
@@ -7,6 +7,14 @@ import { GanttEvent } from './ganttEvents';
 
 export default function GanttEventBridge() {
   const { openDrawer } = useRightDrawer();
+
+  const registerTaskDoubleClickListener = useCallback(
+    () =>
+      addGanttEventListener(GanttEvent.ON_TASK_DOUBLE_CLICK, ({ taskId }) => {
+        openDrawer(<TaskEditorForm mode="edit" existingTaskId={taskId} />, RightDrawerSizes.M);
+      }),
+    [openDrawer],
+  );
 
   useEffect(() => {
     const removeAllListeners = [
@@ -17,13 +25,7 @@ export default function GanttEventBridge() {
     return () => {
       removeAllListeners.forEach((r) => r());
     };
-  }, [openDrawer]);
-
-  const registerTaskDoubleClickListener = () => {
-    return addGanttEventListener(GanttEvent.ON_TASK_DOUBLE_CLICK, ({ taskId }) => {
-      openDrawer(<TaskEditorForm mode="edit" existingTaskId={taskId} />, RightDrawerSizes.M);
-    });
-  };
+  }, [openDrawer, registerTaskDoubleClickListener]);
 
   return null;
 }

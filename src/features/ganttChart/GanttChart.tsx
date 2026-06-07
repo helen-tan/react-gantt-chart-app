@@ -34,10 +34,13 @@ function GanttChart() {
   const tasks = useMemo(() => mapToSVARGanttTasks(state.tasks), [state.tasks]);
   const links = useMemo(() => mapToSVARGanttLinks(state.links), [state.links]);
 
-  const init = useCallback((ganttApiInstance: IApi) => {
-    setGanttApi(ganttApiInstance);
-    registerGanttEvents(ganttApiInstance);
-  }, []);
+  const init = useCallback(
+    (ganttApiInstance: IApi) => {
+      setGanttApi(ganttApiInstance);
+      registerGanttEvents(ganttApiInstance);
+    },
+    [setGanttApi],
+  );
 
   const renderTooltip = useCallback(({ data }: GanttTooltipData) => {
     return data ? <TaskTooltip data={data} /> : null;

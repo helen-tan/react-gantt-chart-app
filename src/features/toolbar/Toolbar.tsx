@@ -12,7 +12,7 @@ export default function Toolbar() {
 
   const handleClick = useCallback(() => {
     openDrawer(<TaskEditorForm />, RightDrawerSizes.M);
-  }, []);
+  }, [openDrawer]);
 
   return (
     <Box
