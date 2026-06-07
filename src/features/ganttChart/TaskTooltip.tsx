@@ -24,6 +24,21 @@ type ToolTipTaskData = {
 export default function TaskTooltip({ data }: TaskTooltipProps) {
   const theme = useTheme();
 
+  const formatDate = (date: Date) => {
+    return moment(date).format('DD MMM YYYY, HH:mm');
+  };
+
+  const task: ToolTipTaskData | null = useMemo(() => {
+    if (!data) return null;
+
+    return {
+      title: data.text ?? '-',
+      type: data.type ?? '-',
+      start: data.start ? formatDate(data.start) : new Date().toLocaleDateString(),
+      end: data.end ? formatDate(data.end) : new Date().toLocaleDateString(),
+    };
+  }, [data]);
+
   if (!data)
     return (
       <Paper
@@ -40,20 +55,6 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
         data is null
       </Paper>
     );
-
-  const formatDate = (date: Date) => {
-    return moment(date).format('DD MMM YYYY, HH:mm');
-  };
-
-  const task: ToolTipTaskData = useMemo(
-    () => ({
-      title: data.text ?? '-',
-      type: data.type ?? '-',
-      start: data.start ? formatDate(data.start) : new Date().toLocaleDateString(),
-      end: data.end ? formatDate(data.end) : new Date().toLocaleDateString(),
-    }),
-    [data],
-  );
 
   return (
     <Paper
@@ -75,7 +76,7 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
             textOverflow: 'ellipsis',
           }}
         >
-          {task.title}
+          {task?.title}
         </Typography>
 
         <Divider sx={{ color: theme.palette.text.secondary }} />
@@ -83,13 +84,13 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
           <Typography variant="body2" fontWeight={500}>
             Start:
           </Typography>
-          <Typography variant="body2">{task.start}</Typography>
+          <Typography variant="body2">{task?.start}</Typography>
         </Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant="body2" fontWeight={500}>
             End:
           </Typography>
-          <Typography variant="body2">{task.end}</Typography>
+          <Typography variant="body2">{task?.end}</Typography>
         </Box>
       </Stack>
     </Paper>
