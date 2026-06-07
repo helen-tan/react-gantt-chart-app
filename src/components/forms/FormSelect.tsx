@@ -27,7 +27,7 @@ export function FormSelect<T extends string | number>({
   const [field] = useField(name);
   const { setFieldValue } = useFormikContext();
 
-  const value = field.value ?? '';
+  const value = (field.value ?? '') as T | '';
 
   return (
     <FormControl fullWidth>
@@ -35,7 +35,7 @@ export function FormSelect<T extends string | number>({
       <Select
         label={label}
         value={value}
-        onChange={(e) => setFieldValue(name, e.target.value)}
+        onChange={(e) => void setFieldValue(name, e.target.value)}
         {...props} // allow caller to pass MUI props like label, disabled, sx etc
         // when spread caller is last - the caller can override properties specified here
       >

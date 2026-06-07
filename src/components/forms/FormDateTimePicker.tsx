@@ -27,7 +27,7 @@ export function FormDateTimePicker(props: FormDateTimePickerProps) {
   const handleChange = useCallback(
     (value: Dayjs | null) => {
       const newValue = value ? value.valueOf() : null;
-      setFieldValue(name, newValue);
+      void setFieldValue(name, newValue);
 
       // Run any parent component provided onChange actions
       if (onChange) {
@@ -40,7 +40,7 @@ export function FormDateTimePicker(props: FormDateTimePickerProps) {
   return (
     <DateTimePicker
       label={label}
-      value={field.value ? dayjs(field.value) : null}
+      value={field.value ? dayjs(field.value as number | string | Date) : null}
       format={format}
       disabled={disabled}
       onChange={handleChange}

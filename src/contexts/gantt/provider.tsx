@@ -87,7 +87,7 @@ export function GanttProvider({ children }: GanttProviderProps) {
     // 2. Update Gantt UI
     if (!ganttApi) return;
     const newTask = mapToSVARGanttTask(task);
-    ganttApi.exec('add-task', {
+    void ganttApi.exec('add-task', {
       task: newTask,
     });
 
@@ -101,14 +101,8 @@ export function GanttProvider({ children }: GanttProviderProps) {
     // 2. Update Gantt UI
     if (!ganttApi) return;
     const updatedTask = mapToSVARGanttTask(task);
-    ganttApi.exec('update-task', {
+    void ganttApi.exec('update-task', {
       id: task.taskId.toString(),
-      // task: {
-      //   text: task.title,
-      //   start: new Date(task.start),
-      //   end: new Date(task.end),
-      //   type: task.type,
-      // },
       task: updatedTask,
     });
     console.log('state', state);
@@ -120,7 +114,7 @@ export function GanttProvider({ children }: GanttProviderProps) {
 
     // 2. Update Gantt UI
     if (!ganttApi) return;
-    ganttApi.exec('delete-task', { id: taskId });
+    void ganttApi.exec('delete-task', { id: taskId });
   };
 
   const getTaskById = (taskId: string) => {
