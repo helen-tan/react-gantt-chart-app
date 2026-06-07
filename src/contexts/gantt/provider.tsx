@@ -1,9 +1,9 @@
-import { useReducer, useState } from 'react';
-import { GanttContext, type GanttState } from './context';
-import type { AppTask } from './types';
-import type { IApi } from '@svar-ui/react-gantt';
-import { mapToSVARGanttTask } from './utils/mapToSVARGantt';
-import moment from 'moment';
+import { useReducer, useState } from "react";
+import { GanttContext, type GanttState } from "./context";
+import type { AppTask } from "./types";
+import type { IApi } from "@svar-ui/react-gantt";
+import { mapToSVARGanttTask } from "./utils/mapToSVARGantt";
+import moment from "moment";
 
 type GanttProviderProps = {
   children: React.ReactNode;
@@ -12,30 +12,30 @@ type GanttProviderProps = {
 const initialState: GanttState = {
   tasks: [
     {
-      taskId: '123',
-      title: 'Test Task 1',
+      taskId: "123",
+      title: "Test Task 1",
       start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      end: moment().add(1, "hour").valueOf(),
       progress: 100,
-      type: 'task',
+      type: "task",
       isOpen: true,
     },
     {
-      taskId: '456',
-      title: 'Test Task 2',
+      taskId: "456",
+      title: "Test Task 2",
       start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      end: moment().add(1, "hour").valueOf(),
       progress: 100,
-      type: 'task',
-      parent: '123',
+      type: "task",
+      parent: "123",
     },
     {
-      taskId: '789',
-      title: 'Test Task 3',
+      taskId: "789",
+      title: "Test Task 3",
       start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      end: moment().add(1, "hour").valueOf(),
       progress: 100,
-      type: 'task',
+      type: "task",
     },
     // ... more tasks
   ],
@@ -47,9 +47,9 @@ type GanttAction =
   //   | { type: 'SET_TASKS'; payload: AppTask[] }
   //   | { type: 'SET_LINKS'; payload: AppLink[] }
   //   | { type: 'SET_SCALES'; payload: AppScale[] }
-  | { type: 'ADD_TASK'; payload: AppTask }
-  | { type: 'UPDATE_TASK'; payload: AppTask }
-  | { type: 'DELETE_TASK'; payload: string };
+  | { type: "ADD_TASK"; payload: AppTask }
+  | { type: "UPDATE_TASK"; payload: AppTask }
+  | { type: "DELETE_TASK"; payload: string };
 
 const reducer = (state: GanttState, action: GanttAction) => {
   switch (action.type) {
@@ -59,14 +59,16 @@ const reducer = (state: GanttState, action: GanttAction) => {
     //   return { ...state, tasks: action.payload };
     // case 'SET_SCALES':
     //   return { ...state, tasks: action.payload };
-    case 'ADD_TASK':
+    case "ADD_TASK":
       return { ...state, tasks: [...state.tasks, action.payload] };
-    case 'UPDATE_TASK':
+    case "UPDATE_TASK":
       return {
         ...state,
-        tasks: state.tasks.map((t) => (t.taskId === action.payload.taskId ? action.payload : t)),
+        tasks: state.tasks.map((t) =>
+          t.taskId === action.payload.taskId ? action.payload : t,
+        ),
       };
-    case 'DELETE_TASK':
+    case "DELETE_TASK":
       return {
         ...state,
         tasks: state.tasks.filter((t) => t.taskId !== action.payload),
@@ -82,41 +84,45 @@ export function GanttProvider({ children }: GanttProviderProps) {
 
   const addTask = (task: AppTask) => {
     // 1. Update state
-    dispatch({ type: 'ADD_TASK', payload: task });
+    dispatch({ type: "ADD_TASK", payload: task });
 
     // 2. Update Gantt UI
     if (!ganttApi) return;
     const newTask = mapToSVARGanttTask(task);
-    ganttApi.exec('add-task', {
+    ganttApi.exec("add-task", {
       task: newTask,
     });
+
+    console.log("state", state);
   };
 
   const updateTask = (task: AppTask) => {
     // 1. Update state
-    dispatch({ type: 'UPDATE_TASK', payload: task });
+    dispatch({ type: "UPDATE_TASK", payload: task });
 
     // 2. Update Gantt UI
     if (!ganttApi) return;
-    // const updatedTask: ITask = maptoSVARGanttTask(task);
-    ganttApi.exec('update-task', {
+    const updatedTask = mapToSVARGanttTask(task);
+    ganttApi.exec("update-task", {
       id: task.taskId.toString(),
-      task: {
-        text: task.title,
-        start: new Date(task.start),
-        end: new Date(task.end),
-        type: task.type,
-      },
+      // task: {
+      //   text: task.title,
+      //   start: new Date(task.start),
+      //   end: new Date(task.end),
+      //   type: task.type,
+      // },
+      task: updatedTask,
     });
+    console.log("state", state);
   };
 
   const deleteTask = (taskId: string) => {
     // 1. Update state
-    dispatch({ type: 'DELETE_TASK', payload: taskId });
+    dispatch({ type: "DELETE_TASK", payload: taskId });
 
     // 2. Update Gantt UI
     if (!ganttApi) return;
-    ganttApi.exec('delete-task', { id: taskId });
+    ganttApi.exec("delete-task", { id: taskId });
   };
 
   const getTaskById = (taskId: string) => {
@@ -126,7 +132,15 @@ export function GanttProvider({ children }: GanttProviderProps) {
 
   return (
     <GanttContext.Provider
-      value={{ state, ganttApi, setGanttApi, addTask, updateTask, deleteTask, getTaskById }}
+      value={{
+        state,
+        ganttApi,
+        setGanttApi,
+        addTask,
+        updateTask,
+        deleteTask,
+        getTaskById,
+      }}
     >
       {children}
     </GanttContext.Provider>

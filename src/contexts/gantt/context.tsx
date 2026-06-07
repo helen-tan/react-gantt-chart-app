@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
-import type { AppLink, AppTask } from './types';
-import type { IApi } from '@svar-ui/react-gantt';
+import { createContext, useContext } from "react";
+import type { AppLink, AppTask } from "./types";
+import type { IApi } from "@svar-ui/react-gantt";
 
 export interface GanttState {
   tasks: AppTask[];
@@ -19,12 +19,14 @@ export interface GanttContextType {
   getTaskById: (taskId: string) => AppTask | undefined;
 }
 
-export const GanttContext = createContext<GanttContextType | undefined>(undefined);
+export const GanttContext = createContext<GanttContextType | undefined>(
+  undefined,
+);
 
 export const useGanttContext = () => {
   const context = useContext(GanttContext);
   if (!context) {
-    throw new Error('useGanttContext must be used within GanttProvider.');
+    throw new Error("useGanttContext must be used within GanttProvider.");
   }
   return context;
 };

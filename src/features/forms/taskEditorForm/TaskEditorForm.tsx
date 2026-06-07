@@ -1,25 +1,25 @@
-import { useCallback, useMemo } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Form } from '../../../components/forms/Form';
-import FormContent from './FormContent';
+import { useCallback, useMemo } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Form } from "../../../components/forms/Form";
+import FormContent from "./FormContent";
 import {
   TaskEditorFormFields,
   TASK_TYPE_OPTIONS,
   type TaskEditorFormValues,
-} from './TaskEditorFormConfig';
-import { useRightDrawer } from '../../../contexts/rightDrawer/context';
-import { useGanttContext } from '../../../contexts/gantt/context';
-import type { AppTask } from '../../../contexts/gantt/types';
-import moment from 'moment';
+} from "./TaskEditorFormConfig";
+import { useRightDrawer } from "../../../contexts/rightDrawer/context";
+import { useGanttContext } from "../../../contexts/gantt/context";
+import type { AppTask } from "../../../contexts/gantt/types";
+import moment from "moment";
 
 type TaskEditorFormProps = {
-  mode?: 'create' | 'edit';
+  mode?: "create" | "edit";
   existingTaskId?: string;
 };
 
 export default function TaskEditorForm({
-  mode = 'create',
-  existingTaskId = '',
+  mode = "create",
+  existingTaskId = "",
 }: TaskEditorFormProps) {
   const { closeDrawer } = useRightDrawer();
   const { getTaskById, addTask, updateTask } = useGanttContext();
@@ -27,7 +27,7 @@ export default function TaskEditorForm({
   // const task = mode === 'edit' ? getTaskById(existingTaskId) : undefined;
 
   const task = useMemo(() => {
-    if (mode === 'edit') {
+    if (mode === "edit") {
       return getTaskById(existingTaskId);
     }
     return undefined;
@@ -35,10 +35,10 @@ export default function TaskEditorForm({
 
   const initialValues: TaskEditorFormValues = useMemo(() => {
     const now = moment().valueOf();
-    const defaultEnd = moment().add(1, 'hour').valueOf();
+    const defaultEnd = moment().add(1, "hour").valueOf();
 
     return {
-      [TaskEditorFormFields.TITLE]: task?.title ?? '',
+      [TaskEditorFormFields.TITLE]: task?.title ?? "",
       [TaskEditorFormFields.TYPE]: task?.type ?? TASK_TYPE_OPTIONS[0].value,
       [TaskEditorFormFields.START]: task?.start ?? now,
       [TaskEditorFormFields.END]: task?.end ?? defaultEnd,
@@ -50,14 +50,14 @@ export default function TaskEditorForm({
     const { title, type, start, end } = values;
 
     const task: AppTask = {
-      taskId: mode === 'edit' ? existingTaskId : uuidv4(),
+      taskId: mode === "edit" ? existingTaskId : uuidv4(),
       title,
       type,
       start,
       end,
     };
 
-    if (mode === 'edit') {
+    if (mode === "edit") {
       updateTask(task);
     } else {
       addTask(task);

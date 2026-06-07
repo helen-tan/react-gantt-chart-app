@@ -1,6 +1,6 @@
-import type { IApi, TID } from '@svar-ui/react-gantt';
-import { emitGanttEvent } from '../events/eventBus';
-import { GanttEvent } from '../events/ganttEvents';
+import type { IApi, TID } from "@svar-ui/react-gantt";
+import { emitGanttEvent } from "../events/eventBus";
+import { GanttEvent } from "../events/ganttEvents";
 
 export function registerGanttEvents(ganttApi: IApi) {
   if (!ganttApi) return;
@@ -16,5 +16,7 @@ export function registerGanttEvents(ganttApi: IApi) {
   };
 
   // -------- Detect Gantt Event --------
-  ganttApi.on('show-editor', (task: { id: TID }) => handleTaskDoubleClick(task));
+  ganttApi.on("show-editor", (task: { id: TID }) =>
+    handleTaskDoubleClick(task),
+  );
 }

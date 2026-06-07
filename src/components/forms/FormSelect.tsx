@@ -1,8 +1,8 @@
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { type SelectProps } from '@mui/material/Select';
-import { useField, useFormikContext } from 'formik';
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { type SelectProps } from "@mui/material/Select";
+import { useField, useFormikContext } from "formik";
 
 export interface FormSelectOption<T extends string | number> {
   value: T;
@@ -11,7 +11,7 @@ export interface FormSelectOption<T extends string | number> {
 
 interface FormSelectProps<T extends string | number> extends Omit<
   SelectProps,
-  'name' | 'value' | 'onChange' // Omit<TextFieldProps,'name' | 'select'> - take all TextField props, except 'name' & 'select'
+  "name" | "value" | "onChange" // Omit<TextFieldProps,'name' | 'select'> - take all TextField props, except 'name' & 'select'
 > {
   name: string;
   label: string;
@@ -27,7 +27,7 @@ export function FormSelect<T extends string | number>({
   const [field] = useField(name);
   const { setFieldValue } = useFormikContext();
 
-  const value = field.value ?? '';
+  const value = field.value ?? "";
 
   return (
     <FormControl fullWidth>
