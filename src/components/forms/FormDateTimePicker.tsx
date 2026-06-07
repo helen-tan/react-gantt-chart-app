@@ -1,6 +1,6 @@
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { useField, useFormikContext } from 'formik';
-import moment, { type Moment } from 'moment';
+import dayjs, { type Dayjs } from 'dayjs';
 import { useCallback } from 'react';
 import type { SxProps, Theme } from '@mui/material/styles';
 import type { TextFieldProps } from '@mui/material';
@@ -21,26 +21,30 @@ interface FormDateTimePickerProps {
 export function FormDateTimePicker(props: FormDateTimePickerProps) {
   const { name, label, format, disabled, onChange, sx, textFieldProps } = props;
 
-  const [field, meta] = useField(name);
+  const [field] = useField(name);
   const { setFieldValue } = useFormikContext();
 
-  const handleChange = useCallback((value: Moment | null) => {
-    const newValue = value ? value.valueOf() : null;
-    setFieldValue(name, newValue);
+  const handleChange = useCallback(
+    (value: Dayjs | null) => {
+      const newValue = value ? value.valueOf() : null;
+      setFieldValue(name, newValue);
 
-    // Run any parent component provided onChange actions
-    if (onChange) {
-      onChange(newValue);
-    }
-  }, []);
+      // Run any parent component provided onChange actions
+      if (onChange) {
+        onChange(newValue);
+      }
+    },
+    [name, onChange, setFieldValue],
+  );
 
   return (
     <DateTimePicker
       label={label}
-      value={field.value ? moment(field.value) : null}
+      value={field.value ? dayjs(field.value) : null}
       format={format}
       disabled={disabled}
       onChange={handleChange}
+      ampm={false}
       // apply component provided styles
       sx={sx}
       slotProps={{
