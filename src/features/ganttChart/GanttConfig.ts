@@ -16,12 +16,12 @@ const columns: IGanttColumn[] = [
   //     align: 'center',
   //     flexgrow: 1,
   //   },
-  {
-    id: 'add-task',
-    header: '',
-    width: 50,
-    align: 'center',
-  },
+  // {
+  //   id: 'add-task',
+  //   header: '',
+  //   width: 50,
+  //   align: 'center',
+  // },
 ];
 
 // Scales
