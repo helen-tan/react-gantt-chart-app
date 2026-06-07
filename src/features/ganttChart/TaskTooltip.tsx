@@ -4,7 +4,7 @@ import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
 import type { ITask } from '@svar-ui/react-gantt';
 import { useMemo } from 'react';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 export type GanttTooltipData = {
   data: ITask | null;
@@ -24,8 +24,9 @@ type ToolTipTaskData = {
 export default function TaskTooltip({ data }: TaskTooltipProps) {
   const theme = useTheme();
 
-  const formatDate = (date: Date) => {
-    return moment(date).format('DD MMM YYYY, HH:mm');
+  const formatDate = (date: Date | undefined) => {
+    if (!date) return '—';
+    return dayjs(date).format('DD MMM YYYY, HH:mm');
   };
 
   const task: ToolTipTaskData | null = useMemo(() => {
@@ -34,8 +35,8 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
     return {
       title: data.text ?? '-',
       type: data.type ?? '-',
-      start: data.start ? formatDate(data.start) : new Date().toLocaleDateString(),
-      end: data.end ? formatDate(data.end) : new Date().toLocaleDateString(),
+      start: formatDate(data.start),
+      end: formatDate(data.end),
     };
   }, [data]);
 

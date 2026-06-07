@@ -10,7 +10,7 @@ import {
 import { useRightDrawer } from '../../../contexts/rightDrawer/context';
 import { useGanttContext } from '../../../contexts/gantt/context';
 import type { AppTask } from '../../../contexts/gantt/types';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 type TaskEditorFormProps = {
   mode?: 'create' | 'edit';
@@ -34,8 +34,8 @@ export default function TaskEditorForm({
   }, [existingTaskId, getTaskById, mode]);
 
   const initialValues: TaskEditorFormValues = useMemo(() => {
-    const now = moment().valueOf();
-    const defaultEnd = moment().add(1, 'hour').valueOf();
+    const now = dayjs().valueOf();
+    const defaultEnd = dayjs().add(1, 'hour').valueOf();
 
     return {
       [TaskEditorFormFields.TITLE]: task?.title ?? '',

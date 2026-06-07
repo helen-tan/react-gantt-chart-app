@@ -3,19 +3,21 @@ import { GanttContext, type GanttState } from './context';
 import type { AppTask } from './types';
 import type { IApi } from '@svar-ui/react-gantt';
 import { mapToSVARGanttTask } from './utils/mapToSVARGantt';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 type GanttProviderProps = {
   children: React.ReactNode;
 };
+
+const now = dayjs();
 
 const initialState: GanttState = {
   tasks: [
     {
       taskId: '123',
       title: 'Test Task 1',
-      start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      start: now.valueOf(),
+      end: now.add(1, 'hour').valueOf(),
       progress: 100,
       type: 'task',
       isOpen: true,
@@ -23,8 +25,8 @@ const initialState: GanttState = {
     {
       taskId: '456',
       title: 'Test Task 2',
-      start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      start: now.valueOf(),
+      end: now.add(1, 'hour').valueOf(),
       progress: 100,
       type: 'task',
       parent: '123',
@@ -32,8 +34,8 @@ const initialState: GanttState = {
     {
       taskId: '789',
       title: 'Test Task 3',
-      start: moment().valueOf(),
-      end: moment().add(1, 'hour').valueOf(),
+      start: now.valueOf(),
+      end: now.add(1, 'hour').valueOf(),
       progress: 100,
       type: 'task',
     },
