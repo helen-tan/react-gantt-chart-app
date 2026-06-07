@@ -1,11 +1,9 @@
 import React from 'react';
 import { Gantt, Tooltip, Willow, WillowDark, type IApi } from '@svar-ui/react-gantt';
-import '@svar-ui/react-gantt/all.css';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { ThemeContext } from '../../contexts/themeContext/context';
-import { ThemeModes, type ThemeMode } from '../../types/theme.model';
+import type { ThemeMode } from '../../types/theme.model';
 import Box from '@mui/material/Box';
-import './GanttChart.module.css';
 import {
   mapToSVARGanttLinks,
   mapToSVARGanttTasks,
@@ -14,15 +12,12 @@ import { useGanttContext } from '../../contexts/gantt/context';
 import { columns, scales } from './GanttConfig';
 import { registerGanttEvents } from './registerGanttEvents';
 import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
+import '@svar-ui/react-gantt/all.css';
+import './GanttChart.module.css';
 
 function GanttChart() {
-  const [theme, setTheme] = useState<ThemeMode>(ThemeModes.LIGHT);
-  const { mode: themeMode } = useContext(ThemeContext);
+  const { mode: theme } = useContext(ThemeContext);
   const { state, ganttApi, setGanttApi } = useGanttContext();
-
-  useEffect(() => {
-    setTheme(themeMode);
-  }, [themeMode]);
 
   const skins: { id: ThemeMode; label: string; component: React.FC }[] = [
     { id: 'light', label: 'willow', component: Willow },
