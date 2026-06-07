@@ -1,5 +1,5 @@
 /* Formik supported Form component */
-import { Formik, Form as FormikForm, type FormikValues } from "formik";
+import { Formik, Form as FormikForm, type FormikValues } from 'formik';
 
 interface FormProps<T extends FormikValues> {
   initialValues: T;

@@ -1,10 +1,10 @@
-import type { AppTaskType } from "../../../contexts/gantt/types";
+import type { AppTaskType } from '../../../contexts/gantt/types';
 
 export const TaskEditorFormFields = {
-  TITLE: "title",
-  START: "start",
-  END: "end",
-  TYPE: "type",
+  TITLE: 'title',
+  START: 'start',
+  END: 'end',
+  TYPE: 'type',
 } as const;
 
 // export type TaskEditorFormFields = {
@@ -27,7 +27,7 @@ export type FormSelectOption<T extends string | number> = {
 };
 
 export const TASK_TYPE_OPTIONS: FormSelectOption<AppTaskType>[] = [
-  { value: "task", label: "Task" },
-  { value: "milestone", label: "Milstone" },
-  { value: "summary", label: "Summary" },
+  { value: 'task', label: 'Task' },
+  { value: 'milestone', label: 'Milstone' },
+  { value: 'summary', label: 'Summary' },
 ];

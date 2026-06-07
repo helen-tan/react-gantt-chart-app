@@ -1,5 +1,5 @@
-import type { ILink, ITask } from "@svar-ui/react-gantt";
-import type { AppLink, AppTask } from "../types";
+import type { ILink, ITask } from '@svar-ui/react-gantt';
+import type { AppLink, AppTask } from '../types';
 
 // TASKS
 // --------------------

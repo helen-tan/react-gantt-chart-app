@@ -1,4 +1,4 @@
-import { GanttEvent } from "./ganttEvents";
+import { GanttEvent } from './ganttEvents';
 
 type EventMap = {
   [GanttEvent.ON_TASK_DOUBLE_CLICK]: { taskId: string };
@@ -9,10 +9,7 @@ type Handler<K extends EventKey> = (payload: EventMap[K]) => void;
 
 const listeners: Partial<Record<EventKey, Set<Handler<any>>>> = {};
 
-export function addGanttEventListener<K extends EventKey>(
-  event: K,
-  handler: Handler<K>,
-) {
+export function addGanttEventListener<K extends EventKey>(event: K, handler: Handler<K>) {
   if (!listeners[event]) {
     listeners[event] = new Set();
   }
@@ -24,10 +21,7 @@ export function addGanttEventListener<K extends EventKey>(
   };
 }
 
-export function emitGanttEvent<K extends EventKey>(
-  event: K,
-  payload: EventMap[K],
-) {
+export function emitGanttEvent<K extends EventKey>(event: K, payload: EventMap[K]) {
   listeners[event]?.forEach((handler) => {
     (handler as Handler<K>)(payload);
   });
