@@ -11,9 +11,11 @@ import {
 import { useGanttContext } from '../../contexts/gantt/context';
 import { columns, scales } from './GanttConfig';
 import { registerGanttEvents } from './registerGanttEvents';
-import TaskTooltip, { type GanttTooltipData } from './TaskTooltip';
+// import TaskTooltip from './TaskTooltip';
 import '@svar-ui/react-gantt/all.css';
 import './GanttChart.module.css';
+// import type { TooltipContentData } from '../../types/gantt.model';
+import MyTooltipContent from './MyTooltipContent';
 
 function GanttChart() {
   const { mode: theme } = useContext(ThemeContext);
@@ -37,14 +39,25 @@ function GanttChart() {
     [setGanttApi],
   );
 
-  const renderTooltip = useCallback(({ data }: GanttTooltipData) => {
-    return data ? <TaskTooltip data={data} /> : null;
-  }, []);
+  // const renderTooltip = useCallback(({ data }: GanttTooltipData) => {
+  //   return data ? <TaskTooltip data={data} /> : null;
+  // }, []);
+
+  // const renderTooltip = useCallback(({ data }: { api: IApi; data: TooltipContentData }) => {
+  //   return data ? <TaskTooltip data={data} /> : null;
+  // }, []);
 
   return (
+    // <Box sx={{ flex: 1, minHeight: 0, width: '100%' }}>
+    //   <ThemeComponent>
+    //     <Tooltip api={ganttApi} content={(i) => renderTooltip(i)}>
+    //       <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
+    //     </Tooltip>
+    //   </ThemeComponent>
+    // </Box>
     <Box sx={{ flex: 1, minHeight: 0, width: '100%' }}>
       <ThemeComponent>
-        <Tooltip api={ganttApi} content={(data) => renderTooltip(data)}>
+        <Tooltip api={ganttApi} content={MyTooltipContent}>
           <Gantt init={init} tasks={tasks} links={links} scales={scales} columns={columns} />
         </Tooltip>
       </ThemeComponent>
