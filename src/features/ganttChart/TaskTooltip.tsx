@@ -2,16 +2,18 @@ import { Paper, Typography, useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import Stack from '@mui/material/Stack';
-import type { ITask } from '@svar-ui/react-gantt';
+// import type { ITask } from '@svar-ui/react-gantt';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import type { TooltipContentData } from '../../types/gantt.model';
 
-export type GanttTooltipData = {
-  data: ITask | null;
-};
+// export type GanttTooltipData = {
+//   data: TooltipContentData;
+// };
 
-type TaskTooltipProps = {
-  data: ITask | null;
+export type TaskTooltipProps = {
+  // data: ITask | null;
+  data: TooltipContentData;
 };
 
 type ToolTipTaskData = {
@@ -32,12 +34,16 @@ export default function TaskTooltip({ data }: TaskTooltipProps) {
   const task: ToolTipTaskData | null = useMemo(() => {
     if (!data) return null;
 
-    return {
-      title: data.text ?? '-',
-      type: data.type ?? '-',
-      start: formatDate(data.start),
-      end: formatDate(data.end),
-    };
+    if ('task' in data) {
+      const taskData = data.task;
+      return {
+        title: taskData.text ?? '-',
+        type: taskData.type ?? '-',
+        start: formatDate(taskData.start),
+        end: formatDate(taskData.end),
+      };
+    }
+    return null;
   }, [data]);
 
   if (!data)
